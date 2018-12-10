@@ -9,7 +9,7 @@ int main()
 	meeting_t * meeting = NULL;
 	int size,incrementBlocks;
 	float begining, end;
-	int room;
+	int room,index;
 	printf("%s\n","MENU" );
 	printf("%s\n","-----------------------" );
 
@@ -37,7 +37,7 @@ int main()
 					printf("%s\n","enter number of increment slot" );
 					scanf("%d",&incrementBlocks);
 
-					ADCreate(size, incrementBlocks);
+					controler = ADCreate(size, incrementBlocks);
 
 					flag = 1;
 				}
@@ -67,6 +67,12 @@ int main()
 						ADDestroy(controler);
 						return -1;
 					}
+					stat = InsertMeeting(controler, meeting);
+					if(stat != WELL)
+					{
+						printf("error insert meeting in the calendar \n");
+						break;
+					}
 				}
 				else
 					printf("%s\n","no calendar" );
@@ -76,10 +82,10 @@ int main()
 				{
 					printf("%s\n","enter the begining time of meeting you whant to remove: \n" );
 					scanf("%f", &begining);
-					meeting = FindMeeting(controler,begining);
+					index = FindMeeting(controler,begining,&meeting);
 					if(meeting)
 					{
-						/*stat = RemoveMeeting(controler,meeting);*/
+						stat = RemoveMeeting(controler, &meeting, begining);
 						printf("%.2f\t%.2f\t%d\n",meeting ->begin, meeting ->end, meeting -> room );
 					}
 				}
@@ -89,10 +95,10 @@ int main()
 			case 5 :
 				printf("%s\n","enter the begining time of meeting you whant to find: \n" );
 				scanf("%f", &begining);
-				meeting = FindMeeting(controler,begining);
-				if(meeting)
+				index = FindMeeting(controler,begining,&meeting);
+				if(index >= 0)
 				{
-					printf("%.2f\t%.2f\t%d\n",meeting ->begin, meeting ->end, meeting -> room );
+					printf("%.2f\t%.2f\t%d\n",meeting -> begin, meeting -> end, meeting -> room );
 				}
 				else
 					printf("%s\n","not such a meeting\n" );

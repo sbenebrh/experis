@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include <stdarg.h>
 #include"function.h"
+
 
 struct AD
 {
@@ -12,6 +12,64 @@ struct AD
 };
 
 
+enum status checkNullArray(meeting_t * _arr[])
+{
+	if(_arr == NULL)
+	{
+		return SEGMENTATION_FAULT;
+	}
+	return WELL;
+}
+
+void swap(meeting_t** _firstMeeting, meeting_t**  _secondmeeting)
+{
+	meeting_t * temp = *_firstMeeting;
+	*_firstMeeting = *_secondmeeting;
+	*_secondmeeting = temp;
+}
+
+int BubbleUp(meeting_t *  _arr[], int _size)
+{
+	int i = 0;
+	int isSwapped = 0;
+	
+	for(; i < _size; i++)
+	{
+		if(_arr[i] -> begin > _arr[i+1] -> begin)
+		{
+			swap( & _arr[i], & _arr[i+1]);
+			isSwapped = 1;
+		}
+	}
+	return isSwapped;
+}
+
+
+
+void sortMeeting(AD * _DAptr)
+{
+	int i = 0;
+
+	if(!_DAptr)
+	{
+		return ;
+	}
+
+	if((_DAptr -> numOfMeeting) <= 0){
+		return ;
+	}
+
+	checkNullArray(_DAptr -> arrayMeeting);
+
+	for(; i < _DAptr -> numOfMeeting; i++)
+	{
+		if(IS_SWAPPED == BubbleUp(&(_DAptr -> arrayMeeting[0]),  (_DAptr -> numOfMeeting -1)-i))
+		{
+			break;
+		}
+	}
+	
+}
 int checkErrInput(int _var,int _limit)
 {
 	
@@ -40,8 +98,8 @@ void initializeStruct(AD * _ptr,int _size,int _incrementBlocks)
 
 meeting_t * createMeeting(float _begin, float _end, int _room)
 {
-	meeting_t  *meeting = NULL;
-	if(checkErrInput(_begin,0) == ERR_INPUT || checkErrInput(_end,0) == ERR_INPUT || checkErrInput(_end,_begin) || _begin > 23.99 || _end > 23.99)
+	meeting_t  * meeting = NULL;
+	if(checkErrInput(_begin,0) == ERR_INPUT || checkErrInput(_end,0) == ERR_INPUT || checkErrInput(_end,_begin) == ERR_INPUT || _begin > 23.99 || _end > 23.99)
 	{
 		return NULL;
 	}
@@ -81,25 +139,57 @@ AD * ADCreate(int _size, int _incrementBlocks)
 	return ADptr;
 
 }
-meeting_t * FindMeeting(const AD * const _DAptr, float _begining)
+
+enum status RemoveMeeting(AD * _DAptr, meeting_t* *_removedMeeting, float _begining)
+{	
+	int indexFindedMeeting;
+	int c;
+
+	if(checkSegmentationError(_DAptr) == SEGMENTATION_FAULT )
+	{
+		return SEGMENTATION_FAULT;
+	}
+	if(checkErrInput(_begining,0) == ERR_INPUT || _begining > 23.99)
+	{
+		return ERR_INPUT;
+	}
+
+	indexFindedMeeting = FindMeeting(_DAptr, _begining, _removedMeeting);
+	if(0 < indexFindedMeeting)
+	{
+		return UNKNOWN_MEETING;
+	}
+	*_removedMeeting = _DAptr -> arrayMeeting[indexFindedMeeting];
+
+	for(c = indexFindedMeeting ; c < _DAptr -> numOfMeeting -1; c++)
+	{
+		_DAptr -> arrayMeeting[c] = _DAptr -> arrayMeeting[c + 1];
+	}
+	_DAptr ->numOfMeeting -= 1;
+
+
+	return WELL;
+}
+
+int FindMeeting(const AD * const _DAptr, float _begining, meeting_t* *_findedMeeting)
 {
+	
 	int i;
+
 	if(checkSegmentationError(_DAptr) == SEGMENTATION_FAULT || checkSegmentationError(_DAptr -> arrayMeeting) == SEGMENTATION_FAULT || checkErrInput(_begining,0) == ERR_INPUT || _begining > 23.99)
 	{
-		return NULL;
+		return SEGMENTATION_FAULT;
 	}
-	for ( i = 0; i < _DAptr ->numOfMeeting; ++i)
+	for ( i = 0; i < _DAptr ->numOfMeeting; i++)
 	{
-		if(_DAptr ->arrayMeeting[i+1]->begin < _begining)
-		{
-			continue;
-		}
+		
 		if(_DAptr ->arrayMeeting[i]->begin == _begining)
 		{
-			return _DAptr ->arrayMeeting[i];
+			*_findedMeeting = _DAptr ->arrayMeeting[i];
+			return i;
 		}
 	}
-	return NULL;
+	return -1;
 }
 
 
@@ -131,20 +221,66 @@ enum status ADPrint(const AD * const _DAptr)
 	printf("%s\t%s\t%s\t%s\t\n","number:","start", "end", "room" );
 	printf("%s\n","-----------------------------------" );
 
-	for ( i = 0; i < _DAptr -> numOfMeeting; ++i)
+	for ( i = 0; i < _DAptr -> numOfMeeting; i++)
 	{
 		printf("%d\t%.2f\t%.2f\t%d\n",i+1,_DAptr->arrayMeeting[i]-> begin,_DAptr->arrayMeeting[i]-> end,_DAptr->arrayMeeting[i]-> room);
 	}
+	printf("\n" );
 	return WELL;
 }
+
+
+enum status checkOverLoadingMeeting(AD * _DAptr, const meeting_t * const _meeting)
+{
+	int i;
+	for(i  = 0; i < _DAptr -> numOfMeeting; i++)
+	{
+		if((_DAptr -> arrayMeeting[i] -> begin < _meeting -> begin && _DAptr -> arrayMeeting[i] -> end > _meeting ->begin ) || (_DAptr -> arrayMeeting[i] -> begin > _meeting -> begin && _DAptr -> arrayMeeting[i] -> begin < _meeting -> end) || (_DAptr -> arrayMeeting[i] -> end > _meeting -> begin && _DAptr -> arrayMeeting[i] -> end < _meeting -> end))
+		{
+			return ERR_OVERLOADING_MEETING;
+		}
+	}
+	return WELL;
+}
+
+
 enum status InsertMeeting(AD * _DAptr,meeting_t * _meeting)
 {
+	enum status status;
+	meeting_t ** temp = NULL;
 	
 	if(checkSegmentationError(_DAptr) == SEGMENTATION_FAULT || checkSegmentationError(_meeting) == SEGMENTATION_FAULT)
 	{
 		return SEGMENTATION_FAULT;
 	}
+	if(_DAptr -> size == _DAptr -> numOfMeeting && _DAptr -> incrementBlocks == 0)
+		return NOT_ENOUGH_SPACE	;
+
+
+	status = checkOverLoadingMeeting(_DAptr,_meeting);
+	if(status != WELL)
+		return ERR_OVERLOADING_MEETING;
+
+	if(_DAptr -> size == _DAptr -> numOfMeeting && _DAptr -> incrementBlocks > 0)
+	{
+		temp = (meeting_t**) realloc(_DAptr -> arrayMeeting,(_DAptr -> size + _DAptr -> incrementBlocks)* sizeof(meeting_t **));
+		if(temp)
+		{
+			_DAptr -> arrayMeeting = temp;
+			_DAptr -> size += _DAptr -> incrementBlocks;
+
+		}
+		else
+		{
+			return ERR_REALLOCATION;
+		}
+
+	}
 	_DAptr -> arrayMeeting[_DAptr -> numOfMeeting] = _meeting;
 	_DAptr -> numOfMeeting += 1;
+	if(_DAptr -> numOfMeeting > 1)
+	{
+		sortMeeting(_DAptr);
+	}
 	return WELL;
 }
