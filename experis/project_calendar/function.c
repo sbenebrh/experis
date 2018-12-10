@@ -93,7 +93,7 @@ void initializeStruct(AD * _ptr,int _size,int _incrementBlocks)
 	_ptr -> size = _size;
 	_ptr-> incrementBlocks = _incrementBlocks;
 	_ptr -> numOfMeeting = 0;
-	_ptr -> arrayMeeting = (meeting_t**) malloc(_size * sizeof(meeting_t*));
+	_ptr -> arrayMeeting = (meeting_t**) calloc(_size , sizeof(meeting_t*));
 }
 
 meeting_t * createMeeting(float _begin, float _end, int _room)
@@ -160,6 +160,8 @@ enum status RemoveMeeting(AD * _DAptr, meeting_t* *_removedMeeting, float _begin
 		return UNKNOWN_MEETING;
 	}
 	*_removedMeeting = _DAptr -> arrayMeeting[indexFindedMeeting];
+	
+	free(_DAptr -> arrayMeeting[indexFindedMeeting];
 
 	for(c = indexFindedMeeting ; c < _DAptr -> numOfMeeting -1; c++)
 	{
@@ -201,9 +203,9 @@ void ADDestroy(AD * _DAptr)
 	{
 		if(!(_DAptr -> arrayMeeting))
 		{
-			for (i = 0; i < _DAptr -> numOfMeeting; ++i)
+			for (i = 0; i ; --i)/* more efficient with i = _DAptr -> numOfmeeting et faire --i*/
 			{
-				/*TODO stat = RemoveMeeting(_DAptr);*/
+				free(_DAptr -> arrayMeeting[i]);
 			}
 			free(_DAptr -> arrayMeeting);
 		}
@@ -280,7 +282,7 @@ enum status InsertMeeting(AD * _DAptr,meeting_t * _meeting)
 	_DAptr -> numOfMeeting += 1;
 	if(_DAptr -> numOfMeeting > 1)
 	{
-		sortMeeting(_DAptr);
+		sortMeeting(_DAptr);/* using shift is more efficient*/
 	}
 	return WELL;
 }
