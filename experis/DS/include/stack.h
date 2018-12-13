@@ -9,14 +9,8 @@
 */
 
 #include"../vector/function.h"
-#define MAGIC_NUMBER 0XBEEFBEEF
-#define NO_MAGIC_NUMBER 0XDEADBEEF
+typedef struct Vector Stack;
 
-typedef struct stack
-{
-	unsigned int s_magicNumber;
-	Vector* vector;
-}Stack;
 /** 
  * @function: StackCreate
  * create a pointer to a struct witch his contains a pointer to a vector of 
