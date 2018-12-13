@@ -1,6 +1,7 @@
 #include"stack.h"
 #include<stdlib.h>
-
+#define EMPTY 1
+#define NOT_EMPTY 0
 /*TODO
 
 
@@ -73,8 +74,10 @@ ADTErr StackPop(Stack* _stack, int* _item)
 	{
 		return NOT_ORIGINAL_STACK;
 	}
+	if(!StackIsEmpty(_stack))
+		return VectorDelete(_stack -> vector, _item);
+	return EMPTY_STACK;
 
-	return VectorDelete(_stack -> vector, _item);
 }
 
 ADTErr StackTop(Stack* _stack, int* _item)
@@ -87,7 +90,9 @@ ADTErr StackTop(Stack* _stack, int* _item)
 	{
 		return NOT_ORIGINAL_STACK;
 	}
-	return VectorGet(_stack -> vector, _stack -> vector -> m_nitems -1 , _item );
+	if(!StackIsEmpty(_stack))
+		return VectorGet(_stack -> vector, _stack -> vector -> m_nitems -1 , _item );
+	return EMPTY_STACK;
 }
 
 int StackIsEmpty(Stack* _stack)
@@ -100,7 +105,7 @@ int StackIsEmpty(Stack* _stack)
 	{
 		return NOT_ORIGINAL_STACK;
 	}
-	return _stack -> vector -> m_nitems;
+	return _stack -> vector -> m_nitems ? EMPTY:NOT_EMPTY;
 
 }
 

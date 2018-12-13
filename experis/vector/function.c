@@ -28,13 +28,13 @@ void initializeVector(Vector* _vector,size_t  _initialSize,size_t _extensionBblo
 	_vector -> m_items = (int*)calloc(_initialSize , sizeof(int));
 }
 
-ADTErr reSize(Vector*_vector,int _increaseBlocks)
+ADTErr reSize(Vector*_vector,int _increaseBlocksfactor)
 {
-	int * temp = (int*) realloc(_vector -> m_items,(_vector -> m_size + _increaseBlocks) * sizeof(int));
+	int * temp = (int*) realloc(_vector -> m_items,(_vector -> m_size +(_vector -> m_blockSize * _increaseBlocksfactor ))  * sizeof(int));
 	if(temp)
 	{
 		_vector -> m_items = temp;
-		_vector -> m_size += _increaseBlocks;
+		_vector -> m_size += _vector -> m_blockSize * _increaseBlocksfactor;
 		return ERR_WELL;
 	}
 	return ERR_REALLOCATION;
@@ -83,7 +83,7 @@ Vector* VectorCreate(size_t _initialSize, size_t _extensionBblockSize)
 		return NULL;
 	}
 
-	FirstVector = (Vector*) malloc(_initialSize * sizeof(Vector));
+	FirstVector = (Vector*) malloc( sizeof(Vector));
 	if(checkSegmentationError((void*) FirstVector) == ERR_ALLOCATION)
 	{
 		return NULL;
@@ -92,6 +92,7 @@ Vector* VectorCreate(size_t _initialSize, size_t _extensionBblockSize)
 	initializeVector(FirstVector, _initialSize, _extensionBblockSize);
 	if(checkSegmentationError(FirstVector) == ERR_SEGMENTATION)
 	{
+		free(FirstVector);
 		return NULL;
 	}
 
@@ -135,23 +136,16 @@ ADTErr VectorAdd(Vector* _vector, int _item)
 
 ADTErr VectorDelete(Vector* _vector, int* _item)
 {
-	int index;
 
 	if(checkSegmentationError(_vector) != ERR_WELL || checkSegmentationError(_vector -> m_items) != ERR_WELL)
 	{
 		return ERR_SEGMENTATION;
 	}
 
-	index = findIndex(_vector, *_item);
-	if(0 > index)
-	{
-		return ERR_NOT_IN_VECTOR;
-	}
-
-	*_item = _vector ->m_items[index];
-	shiftLeft(_vector, index);
+	*_item = _vector ->m_items[_vector -> m_nitems - 1];
 	_vector -> m_nitems -= 1;
-	if(_vector -> m_size - _vector -> m_nitems > 1 && _vector -> m_size > _vector -> m_originalSize )
+
+	if(_vector -> m_size - _vector -> m_nitems > 2* _vector -> m_blockSize && _vector -> m_size > _vector -> m_originalSize )
 	{	
 		if(reSize(_vector, -1) == ERR_REALLOCATION)
 		{
