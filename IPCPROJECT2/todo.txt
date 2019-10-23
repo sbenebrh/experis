@@ -1,0 +1,12 @@
+when subaggr get cdr treat both side if they get the same operator at once
+VERY IMPORTANT THE VALUE OF SUB AGGREGATOR IS SUBSCRIBER NOT CDR
+
+answerreport
+answerextract
+answershutsown
+answerpause
+file monitor move file to done folder
+
+allow to send more than one query and dont wait answer to send another query the ui need to know which answer corresponding of wich query
+
+move channelsStruct to commun file 

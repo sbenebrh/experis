@@ -1,0 +1,309 @@
+﻿template<class T>
+class String
+{ 
+public:
+String(){CreateFrom(NULL);};
+String(const T* _str){CreateFrom(_str);}
+String(const String& _str) {CreateFrom(_str.m_string);}
+~String(){delete[] m_string;}
+String& operator=(const String& _str) {if(this != &_str){delete[] m_string; CreateFrom(_str.m_string);} return *this;}
+String& operator=(const T* _str) {if(_str == NULL) {throw std::exception();}delete[] m_string;CreateFrom(_str); return *this;}
+
+size_t Size() const { return m_size;}
+
+String& operator+=(const String& _str); 
+//Create Conversion operator to avoid non useful overloaded
+// String& operator+=(const T* _str); 
+const T& operator[](size_t _index) const;
+T& operator[](size_t _index);
+
+private:
+void CreateFrom(const T* _str);
+
+private:
+T* m_string;
+size_t m_size;
+};
+template<class T>
+bool operator== (const String<T>& _str1, const String<T>& _str2 ) 
+{
+if(_str1.Size() != _str2.Size())
+{
+return false;
+}
+size_t i = 0;
+for(;_str1[i] == _str2[i] && _str1[i] != '\0';++i);
+return (i == _str1.Size());
+}
+
+template<class T>
+bool operator== (const String<T>& _str1, const T* _str2 ) 
+{
+size_t sizeOfString = 0;
+while(_str2[sizeOfString++]!='\0');
+
+if(_str1.Size() != sizeOfString -1)
+{
+return false;
+}
+size_t i = 0;
+for(;_str1[i] == _str2[i] && _str1[i] != '\0';++i);
+return (i == _str1.Size());
+}
+
+template<class T>
+bool operator== (const T* _str1, const String<T>& _str2 ) 
+{
+
+size_t sizeOfString = 0;
+while(_str1[sizeOfString++]!='\0');
+if(sizeOfString -1 != _str2.Size())
+{
+return false;
+}
+size_t i = 0;
+for(;_str1[i] == _str2[i] && _str1[i] != '\0';++i);
+return (i == _str2.Size());
+}
+
+template<class T>
+bool operator!= (const String<T>& _str1, const String<T>& _str2 ) 
+{
+return !(_str1 == _str2);
+}
+
+template<class T>
+bool operator!= (const String<T>& _str1, const T* _str2 ) 
+{
+return !(_str1 == _str2);
+}
+
+template<class T>
+bool operator!= (const T* _str1, const String<T>& _str2 ) 
+{
+return !(_str1 == _str2);
+}
+
+template<class T>// maybe need another parameter to jump from lower to uper
+String<T> ToUpper(const String<T> _str)
+{
+if(typeid(T) == typeid(char))
+{
+for(int i = 0; i < _str.Size();++i)
+{
+_str[i] = toupper(_str[i]);
+} 
+}
+return _str;
+}
+
+template<class T>
+String<T> operator+(const String<T> & _str1, const String<T> & _str2)
+{
+String<T> s = _str1;
+s += _str2;
+return s;
+}
+
+template<class T>
+String<T> operator+(const String<T> & _str1, const T* _str2)
+{
+String<T> s = _str1;
+String<T> temp = _str2;
+s += temp;
+return s;
+}
+
+
+template<class T>
+bool operator<(const String<T> & _str1, const String<T>& _str2)
+{
+for (int i = 0;;++i)
+{
+if(_str1[i] != _str2[i])
+{
+return _str1[i] < _str2[i] ? true : false;
+}
+if(_str1[i] == '\0')
+{
+return false;
+}
+}
+}
+
+template<class T>
+bool operator<(const String<T> & _str1, const T* _str2)
+{
+if(_str2 == NULL)
+{
+throw std::exception();
+}
+for (int i = 0;;++i)
+{
+if(_str1[i] != _str2[i])
+{
+return _str1[i] < _str2[i] ? true : false;
+}
+if(_str1[i] == '\0')
+{
+return false;
+}
+}
+
+}
+
+
+template<class T>
+void String<T>::CreateFrom(const T* _str)
+{
+if(NULL == _str)
+{
+m_string = new T[default_size];
+m_string[0] = '\0';
+m_size = 0;
+}
+else
+{
+int sizeOfString = 0;
+while(_str[sizeOfString++]!='\0');
+m_string = new T[sizeOfString ];
+std::copy(_str, _str + sizeOfString, m_string);
+m_string[sizeOfString] = '\0';
+m_size = sizeOfString -1;
+}
+}
+
+template<class T>
+String<T> & String<T>::operator+=(const String& _str)
+{
+if(this == & _str)
+{
+throw std::exception();
+}
+
+size_t totalSize = m_size + _str.m_size;
+String tempString = *this;
+delete[] m_string;
+m_string = new T[totalSize + 1];
+if(m_size != 0)
+{
+std::copy(tempString.m_string, tempString.m_string + tempString.m_size, m_string);
+}
+std::copy(_str.m_string, _str.m_string+_str.m_size + 1, m_string + tempString.m_size );
+m_size = totalSize;
+
+return *this;
+
+}
+
+template<class T>
+const T& String<T>::operator[](size_t _index) const
+{
+if(_index > m_size)
+{
+throw std::out_of_range("the index is too big");
+}
+return m_string[_index];
+}
+
+template<class T>
+T& String<T>::operator[](size_t _index) 
+{
+if(_index > m_size)
+{
+throw std::out_of_range("the index is too big");
+}
+return m_string[_index];
+}
+template<class T>
+std::ostream& operator<<(std::ostream& os, const String<T> & _str)
+{
+int i = 0;
+while(_str[i] != '\0')
+{
+os << _str[i];
+i++;
+}
+return os;
+}
+
+template<class T>
+std::istream& operator>>(std::istream& is, const String<T> & _str)
+{ 
+return is;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+UNIT(test_concat_char)
+advcpp::String<char> s1("hello");
+s1 += " world!!";
+ASSERT_THAT(s1.Size() == strlen("hello world!!"));
+END_UNIT
+
+UNIT(test_opSub)
+const advcpp::String<char> s1("hello");
+char c =s1[1];
+ASSERT_THAT(c == 'e');
+END_UNIT
+
+
+UNIT(test_opSub2)
+advcpp::String<char> s1("hello");
+s1[1] = 'a';
+ASSERT_THAT(s1 == "hallo");
+END_UNIT
+
+UNIT(test_opequal)
+advcpp::String<char> s1("hello");
+s1[1] = 'a';
+advcpp::String<char> s2("hallo");
+ASSERT_THAT(s1 == s2);
+END_UNIT
+
+UNIT(test_opequal2)
+advcpp::String<char> s1("hello");
+s1[1] = 'a';
+ASSERT_THAT("hallo" == s1);
+END_UNIT
+
+UNIT(test_Add)
+advcpp::String<char> s1("hello");
+advcpp::String<char> s2;
+advcpp::String<char> s3;
+s3 = s2 + s1;
+ASSERT_THAT(s3 == "hello");
+END_UNIT
+
+UNIT(test_Add2)
+advcpp::String<char> s1("hello");
+advcpp::String<char> s3;
+s3 = s1 + " world";
+ASSERT_THAT(s3 == "hello world");
+END_UNIT
+
+UNIT(test_not_equal)
+advcpp::String<char> s1("hello");
+advcpp::String<char> s3;
+s3 = s1 + " world";
+ASSERT_THAT(s3 != "hello world!!!");
+//std::cout << s3;
+END_UNIT
+
+
+

@@ -1,0 +1,20 @@
+ man 7 signal
+ ulimit --help
+ man bash     ;/ulimit
+ ulimit -c
+ ulimit -c unlimited
+ 
+ ./SimpleDebugging
+ Ctl+\ 
+ 
+ cat core 
+ gdb -q ./SimpleDebugging core
+  
+ go to devide by zero
+ 
+ ulimit -c unlimited
+ make
+ ./DevideByZero 
+ ls
+ gdb -q ./DevideByZero core 
+

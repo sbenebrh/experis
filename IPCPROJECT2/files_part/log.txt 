@@ -1,0 +1,5 @@
+2019-3-10 0:29:38 2080 140667067061504 T fileHandler.c@createChannel:78 CREATE CHANNEL READER
+2019-3-10 0:29:38 2080 140667067061504 T fileHandler.c@sendCdr:171 SEND CDR
+2019-3-10 0:29:38 2080 140667067061504 D fileHandler.c@sendCdr:177 send message to channel
+2019-3-10 0:29:38 2080 140667067061504 T fileHandler.c@sendCdr:171 SEND CDR
+2019-3-10 0:29:38 2080 140667067061504 D fileHandler.c@sendCdr:177 send message to channel

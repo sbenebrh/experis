@@ -1,0 +1,234 @@
+==5381== Memcheck, a memory error detector
+==5381== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5381== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==5381== Command: ls -l
+==5381== 
+--5381-- Valgrind options:
+--5381--    -v
+--5381--    --leak-check=full
+--5381--    --show-leak-kinds=all
+--5381-- Contents of /proc/version:
+--5381--   Linux version 4.15.0-43-generic (buildd@lgw01-amd64-001) (gcc version 7.3.0 (Ubuntu 7.3.0-16ubuntu3)) #46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018
+--5381-- 
+--5381-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--5381-- Page sizes: currently 4096, max supported 4096
+--5381-- Valgrind library directory: /usr/lib/valgrind
+--5381-- Reading syms from /bin/ls
+--5381--    object doesn't have a symbol table
+--5381-- Reading syms from /lib/x86_64-linux-gnu/ld-2.27.so
+--5381--   Considering /lib/x86_64-linux-gnu/ld-2.27.so ..
+--5381--   .. CRC mismatch (computed 1b7c895e wanted 2943108a)
+--5381--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.27.so ..
+--5381--   .. CRC is valid
+--5381-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--5381--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--5381--   .. CRC mismatch (computed c25f395c wanted 0a9602a8)
+--5381--    object doesn't have a symbol table
+--5381--    object doesn't have a dynamic symbol table
+--5381-- Scheduler: using generic scheduler lock implementation.
+--5381-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==5381== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-5381-by-samuel-on-???
+==5381== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-5381-by-samuel-on-???
+==5381== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-5381-by-samuel-on-???
+==5381== 
+==5381== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==5381== don't want to do, unless you know exactly what you're doing,
+==5381== or are doing some strange experiment):
+==5381==   /usr/lib/valgrind/../../bin/vgdb --pid=5381 ...command...
+==5381== 
+==5381== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==5381==   /path/to/gdb ls
+==5381== and then give GDB the following command
+==5381==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=5381
+==5381== --pid is optional if only one valgrind process is running
+==5381== 
+--5381-- REDIR: 0x401f2f0 (ld-linux-x86-64.so.2:strlen) redirected to 0x58060901 (???)
+--5381-- REDIR: 0x401f0d0 (ld-linux-x86-64.so.2:index) redirected to 0x5806091b (???)
+--5381-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--5381--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--5381--   .. CRC mismatch (computed 4b63d83e wanted 670599e6)
+--5381--    object doesn't have a symbol table
+--5381-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--5381--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--5381--   .. CRC mismatch (computed a4b37bee wanted 8ad4dc94)
+--5381--    object doesn't have a symbol table
+==5381== WARNING: new redirection conflicts with existing -- ignoring it
+--5381--     old: 0x0401f2f0 (strlen              ) R-> (0000.0) 0x58060901 ???
+--5381--     new: 0x0401f2f0 (strlen              ) R-> (2007.0) 0x04c32db0 strlen
+--5381-- REDIR: 0x401d360 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c33ee0 (strcmp)
+--5381-- REDIR: 0x401f830 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c374f0 (mempcpy)
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libselinux.so.1
+--5381--    object doesn't have a symbol table
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libc-2.27.so
+--5381--   Considering /lib/x86_64-linux-gnu/libc-2.27.so ..
+--5381--   .. CRC mismatch (computed b1c74187 wanted 042cc048)
+--5381--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.27.so ..
+--5381--   .. CRC is valid
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libpcre.so.3.13.3
+--5381--   Considering /lib/x86_64-linux-gnu/libpcre.so.3.13.3 ..
+--5381--   .. CRC mismatch (computed 23718752 wanted 0e9b5133)
+--5381--    object doesn't have a symbol table
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libdl-2.27.so
+--5381--   Considering /lib/x86_64-linux-gnu/libdl-2.27.so ..
+--5381--   .. CRC mismatch (computed bd82fa02 wanted d1fdccc9)
+--5381--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libdl-2.27.so ..
+--5381--   .. CRC is valid
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libpthread-2.27.so
+--5381--   Considering /usr/lib/debug/.build-id/28/c6aade70b2d40d1f0f3d0a1a0cad1ab816448f.debug ..
+--5381--   .. build-id is valid
+--5381-- REDIR: 0x5102c70 (libc.so.6:memmove) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101d40 (libc.so.6:strncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102f50 (libc.so.6:strcasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101790 (libc.so.6:strcat) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101d70 (libc.so.6:rindex) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x51047c0 (libc.so.6:rawmemchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102de0 (libc.so.6:mempcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102c10 (libc.so.6:bcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101d00 (libc.so.6:strncmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101800 (libc.so.6:strcmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102d40 (libc.so.6:memset) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x51200f0 (libc.so.6:wcschr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101ca0 (libc.so.6:strnlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101870 (libc.so.6:strcspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102fa0 (libc.so.6:strncasecmp) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101840 (libc.so.6:strcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x51030e0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101da0 (libc.so.6:strpbrk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x51017c0 (libc.so.6:index) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5101c70 (libc.so.6:strlen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x510c6c0 (libc.so.6:memrchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102ff0 (libc.so.6:strcasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102be0 (libc.so.6:memchr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5120eb0 (libc.so.6:wcslen) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102050 (libc.so.6:strspn) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102f20 (libc.so.6:stpncpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5102ef0 (libc.so.6:stpcpy) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x51047f0 (libc.so.6:strchrnul) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x5103040 (libc.so.6:strncasecmp_l) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x51958a0 (libc.so.6:__memcpy_chk) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x51f23c0 (libc.so.6:__strrchr_avx2) redirected to 0x4c32730 (rindex)
+--5381-- REDIR: 0x50fb070 (libc.so.6:malloc) redirected to 0x4c2faa0 (malloc)
+--5381-- REDIR: 0x5102590 (libc.so.6:__GI_strstr) redirected to 0x4c37760 (__strstr_sse2)
+--5381-- REDIR: 0x51ee420 (libc.so.6:__memchr_avx2) redirected to 0x4c33f80 (memchr)
+--5381-- REDIR: 0x51f2ad0 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x4c366e0 (memmove)
+--5381-- REDIR: 0x5102b20 (libc.so.6:strstr) redirected to 0x4a2a6e0 (_vgnU_ifunc_wrapper)
+--5381-- REDIR: 0x50fb950 (libc.so.6:free) redirected to 0x4c30cd0 (free)
+--5381-- REDIR: 0x51cdd60 (libc.so.6:__strcmp_ssse3) redirected to 0x4c33da0 (strcmp)
+--5381-- REDIR: 0x51f2590 (libc.so.6:__strlen_avx2) redirected to 0x4c32cf0 (strlen)
+--5381-- REDIR: 0x51e9510 (libc.so.6:__strncmp_sse42) redirected to 0x4c33570 (__strncmp_sse42)
+--5381-- REDIR: 0x51f1fa0 (libc.so.6:__strchr_avx2) redirected to 0x4c32950 (index)
+--5381-- REDIR: 0x51e3c80 (libc.so.6:__stpcpy_ssse3) redirected to 0x4c35f60 (stpcpy)
+--5381-- REDIR: 0x51f2ab0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4c37130 (mempcpy)
+--5381-- REDIR: 0x50fcc30 (libc.so.6:realloc) redirected to 0x4c31cb0 (realloc)
+--5381-- REDIR: 0x51eef90 (libc.so.6:__strcasecmp_l_avx) redirected to 0x4c33890 (strcasecmp_l)
+--5381-- REDIR: 0x50fe030 (libc.so.6:calloc) redirected to 0x4c31a70 (calloc)
+--5381-- REDIR: 0x51f2720 (libc.so.6:__strnlen_avx2) redirected to 0x4c32c90 (strnlen)
+--5381-- REDIR: 0x51f21d0 (libc.so.6:__strchrnul_avx2) redirected to 0x4c37020 (strchrnul)
+--5381-- REDIR: 0x51f05f0 (libc.so.6:__strncasecmp_avx) redirected to 0x4c336d0 (strncasecmp)
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libnss_compat-2.27.so
+--5381--   Considering /lib/x86_64-linux-gnu/libnss_compat-2.27.so ..
+--5381--   .. CRC mismatch (computed afe25112 wanted 3a92b55b)
+--5381--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libnss_compat-2.27.so ..
+--5381--   .. CRC is valid
+--5381-- REDIR: 0x51df950 (libc.so.6:__strcpy_ssse3) redirected to 0x4c32dd0 (strcpy)
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libnss_nis-2.27.so
+--5381--   Considering /lib/x86_64-linux-gnu/libnss_nis-2.27.so ..
+--5381--   .. CRC mismatch (computed 310534dc wanted 22d60ee8)
+--5381--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libnss_nis-2.27.so ..
+--5381--   .. CRC is valid
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libnsl-2.27.so
+--5381--   Considering /lib/x86_64-linux-gnu/libnsl-2.27.so ..
+--5381--   .. CRC mismatch (computed 5dfb2e24 wanted a9b787f5)
+--5381--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libnsl-2.27.so ..
+--5381--   .. CRC is valid
+--5381-- Reading syms from /lib/x86_64-linux-gnu/libnss_files-2.27.so
+--5381--   Considering /lib/x86_64-linux-gnu/libnss_files-2.27.so ..
+--5381--   .. CRC mismatch (computed 5cdb0f74 wanted 1b4e69e7)
+--5381--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libnss_files-2.27.so ..
+--5381--   .. CRC is valid
+--5381-- REDIR: 0x51eeba0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x4c35e00 (bcmp)
+--5381-- Discarding syms at 0x68ba2a0-0x68c01c4 in /lib/x86_64-linux-gnu/libnss_compat-2.27.so due to munmap()
+--5381-- Discarding syms at 0x6ac5070-0x6acc0d9 in /lib/x86_64-linux-gnu/libnss_nis-2.27.so due to munmap()
+--5381-- Discarding syms at 0x6cd3090-0x6ce0807 in /lib/x86_64-linux-gnu/libnsl-2.27.so due to munmap()
+--5381-- Discarding syms at 0x6eeb350-0x6ef1d7f in /lib/x86_64-linux-gnu/libnss_files-2.27.so due to munmap()
+==5381== 
+==5381== HEAP SUMMARY:
+==5381==     in use at exit: 20,529 bytes in 14 blocks
+==5381==   total heap usage: 214 allocs, 200 frees, 95,823 bytes allocated
+==5381== 
+==5381== Searching for pointers to 14 not-freed blocks
+==5381== Checked 121,192 bytes
+==5381== 
+==5381== 24 bytes in 1 blocks are still reachable in loss record 1 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11C488: ??? (in /bin/ls)
+==5381==    by 0x11796C: ??? (in /bin/ls)
+==5381==    by 0x1119AC: ??? (in /bin/ls)
+==5381==    by 0x11263F: ??? (in /bin/ls)
+==5381==    by 0x112D8E: ??? (in /bin/ls)
+==5381==    by 0x10CBB4: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== 24 bytes in 1 blocks are still reachable in loss record 2 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11C488: ??? (in /bin/ls)
+==5381==    by 0x117B0C: ??? (in /bin/ls)
+==5381==    by 0x1127A7: ??? (in /bin/ls)
+==5381==    by 0x112D8E: ??? (in /bin/ls)
+==5381==    by 0x10CBB4: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== 56 bytes in 1 blocks are still reachable in loss record 3 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11C488: ??? (in /bin/ls)
+==5381==    by 0x11C693: ??? (in /bin/ls)
+==5381==    by 0x11B57C: ??? (in /bin/ls)
+==5381==    by 0x10C947: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== 56 bytes in 1 blocks are still reachable in loss record 4 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11C488: ??? (in /bin/ls)
+==5381==    by 0x11C693: ??? (in /bin/ls)
+==5381==    by 0x11B57C: ??? (in /bin/ls)
+==5381==    by 0x10C9A5: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== 73 bytes in 7 blocks are still reachable in loss record 5 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11C488: ??? (in /bin/ls)
+==5381==    by 0x11C693: ??? (in /bin/ls)
+==5381==    by 0x111C98: ??? (in /bin/ls)
+==5381==    by 0x112D8E: ??? (in /bin/ls)
+==5381==    by 0x10CBB4: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== 128 bytes in 1 blocks are still reachable in loss record 6 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11D7F1: ??? (in /bin/ls)
+==5381==    by 0x10CACE: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== 168 bytes in 1 blocks are still reachable in loss record 7 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11C488: ??? (in /bin/ls)
+==5381==    by 0x10E438: ??? (in /bin/ls)
+==5381==    by 0x112BFA: ??? (in /bin/ls)
+==5381==    by 0x10CBB4: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== 20,000 bytes in 1 blocks are still reachable in loss record 8 of 8
+==5381==    at 0x4C2FB0F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5381==    by 0x11C488: ??? (in /bin/ls)
+==5381==    by 0x10CB42: ??? (in /bin/ls)
+==5381==    by 0x5085B96: (below main) (libc-start.c:310)
+==5381== 
+==5381== LEAK SUMMARY:
+==5381==    definitely lost: 0 bytes in 0 blocks
+==5381==    indirectly lost: 0 bytes in 0 blocks
+==5381==      possibly lost: 0 bytes in 0 blocks
+==5381==    still reachable: 20,529 bytes in 14 blocks
+==5381==         suppressed: 0 bytes in 0 blocks
+==5381== 
+==5381== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==5381== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

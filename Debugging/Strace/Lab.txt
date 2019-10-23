@@ -1,0 +1,12 @@
+Strace -h
+man strace
+Strace <any application like ls -l>
+Stterr ; stdout ; Strace -o <fname> <command>
+Man 2 <any call or functionname>
+strace -c <any command>
+strace -t -e open ls -l
+strace -r -e open ls -l
+strace -f ; follow child
+strace -e <call, function name> <command>
+strace -P "/usr/share/locale/en.utf8/LC_TIME/coreutils.mo" ls -l
+sudo strace -f  -p 31739&

@@ -1,0 +1,8 @@
+samuel	1
+21	1
+yair	1
+25	1
+tam	1
+56	1
+jon	2
+30	1

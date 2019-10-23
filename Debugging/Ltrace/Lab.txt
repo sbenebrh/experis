@@ -1,0 +1,12 @@
+Ltrace --help
+man Ltrace
+Ltrace <any application like ls -l>
+Stterr ; stdout ; Ltrace -o <fname> <command>
+Man 3 <any library call or functionname>
+Ltrace -c <any command>
+Ltrace -t -e open ls -l
+Ltrace -r -e open ls -l
+Ltrace -f ; follow child
+Ltrace -e <call, function name> <command>
+Ltrace -S  ls -l
+sudo Ltrace -f  -p 31739&

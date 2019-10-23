@@ -1,0 +1,17 @@
+2019-3-10 1:58:16 4823 140319648438080 D UI.c@rattachToChannel:99 the key is :2019-3-10 1:58:24 4818 140737353996096 T aggregator/subAgg.c@SubAgr_Create:23 S2019-3-10 1:58:24 4823 140319648438080 T UI.c@getChannels:125 key1:9647, key2:9647
+sh.c@ConcurentHash_Create:25 creation of concurentHash struct ...
+2019-3-10 1:58:24 4818 140737353996096 T ../ConcurentHash2/ConcurentHash.c@ConcurentHash_Create:34 creation of HashMap ...
+2019-3-10 1:58:24 4818 140737353996096 T ../ConcurentHash2/ConcurentHash.c@ConcurentHash_Create:42 creation of Mutexs array ...
+2019-3-10 1:58:24 4818 140737353996096 T aggregator/aggrMan.c@AggrMan_Create:44 create aggregator
+2019-3-10 1:58:24 4818 140737353996096 T aggregator/aggrMan.c@AggrMan_Create:53 attach to channel
+2019-3-10 1:58:24 4818 140737353996096 D aggregator/aggrMan.c@rattachToChannel:113 the key is : 1476724782
+2019-3-10 1:58:24 4818 140737353996096 T aggregator/aggrMan.c@initStruct:91 begining creation of threads
+2019-3-10 1:58:24 4818 140737353996096 T Insight.c@QMan_Create:79 create query manager
+2019-3-10 1:58:24 4818 140737326581504 T QueryManager/QMan.c@QMan_Run:93 run query manager
+2019-3-10 1:58:24 4818 140737326581504 T QueryManager/QMan.c@QMan_Run:95 msqid = 360449
+2019-3-10 1:58:24 4818 140737318188800 T QueryManager/QMan.c@run_Thread:192 Create pair of channels
+2019-3-10 1:58:24 4818 140737318188800 T QueryManager/QMan.c@PairChannel_Create:227 the 2 channels are : 9646, 9647
+2019-3-10 1:58:24 4818 140737318188800 D QueryManager/QMan.c@send:251 send PairChannel to channel
+2019-3-10 1:58:28 4818 140737318188800 T QueryManager/QMan.c@receiveMessage:291 i receive a request: 0
+2019-3-10 1:58:50 4818 140737318188800 T ../ConcurentHash2/ConcurentHash.c@ConcurentHash_Get:190 start to lock
+2019-3-10 1:58:53 4818 140737318188800 T ../ConcurentHash2/ConcurentHash.c@ConcurentHash_Get:195 finish to lock

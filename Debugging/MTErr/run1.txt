@@ -1,0 +1,1272 @@
+==18761== Helgrind, a thread error detector
+==18761== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==18761== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==18761== Command: ./MTError01
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #1 is the program's root thread
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #2 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108B4F: main (MTError01.c:127)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B5E: main (MTError01.c:128)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #2
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108821: ThreadFunction1 (MTError01.c:10)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC533: vfprintf (vfprintf.c:1328)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108B74: main (MTError01.c:129)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #2
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108821: ThreadFunction1 (MTError01.c:10)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #3 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108BB7: main (MTError01.c:132)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #3
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10887F: ThreadFunction2 (MTError01.c:24)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC533: vfprintf (vfprintf.c:1328)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108B74: main (MTError01.c:129)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108BC6: main (MTError01.c:133)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #3
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10887F: ThreadFunction2 (MTError01.c:24)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x545204D by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C56C: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BDC01: vfprintf (vfprintf.c:1642)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108BF4: main (MTError01.c:135)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #3
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10887F: ThreadFunction2 (MTError01.c:24)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x545204d is 13 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452057 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC9A9: vfprintf (vfprintf.c:1674)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108BF4: main (MTError01.c:135)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #3
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10887F: ThreadFunction2 (MTError01.c:24)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452057 is 23 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108C00: main (MTError01.c:136)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #3
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10887F: ThreadFunction2 (MTError01.c:24)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #4 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108C1F: main (MTError01.c:137)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #4
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1088DD: ThreadFunction3 (MTError01.c:38)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC533: vfprintf (vfprintf.c:1328)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108BDC: main (MTError01.c:134)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #3
+==18761== Locks held: none
+==18761==    at 0x108889: ThreadFunction2 (MTError01.c:26)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #2
+==18761== Locks held: none
+==18761==    at 0x108845: ThreadFunction1 (MTError01.c:15)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #3
+==18761== Locks held: none
+==18761==    at 0x1088A3: ThreadFunction2 (MTError01.c:29)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #2
+==18761== Locks held: none
+==18761==    at 0x108845: ThreadFunction1 (MTError01.c:15)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #4
+==18761== Locks held: none
+==18761==    at 0x1088E7: ThreadFunction3 (MTError01.c:40)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #3
+==18761== Locks held: none
+==18761==    at 0x1088A3: ThreadFunction2 (MTError01.c:29)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #2
+==18761== Locks held: none
+==18761==    at 0x108845: ThreadFunction1 (MTError01.c:15)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous read of size 4 by thread #4
+==18761== Locks held: none
+==18761==    at 0x1088E7: ThreadFunction3 (MTError01.c:40)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #2
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108860: ThreadFunction1 (MTError01.c:17)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #4
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1088DD: ThreadFunction3 (MTError01.c:38)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #4
+==18761== Locks held: none
+==18761==    at 0x108901: ThreadFunction3 (MTError01.c:43)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #3
+==18761== Locks held: none
+==18761==    at 0x1088A3: ThreadFunction2 (MTError01.c:29)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108C2E: main (MTError01.c:138)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #4
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1088DD: ThreadFunction3 (MTError01.c:38)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108C68: main (MTError01.c:141)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #4
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1088DD: ThreadFunction3 (MTError01.c:38)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #5 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108C87: main (MTError01.c:142)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #5
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10893B: ThreadFunction4 (MTError01.c:52)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC533: vfprintf (vfprintf.c:1328)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108C44: main (MTError01.c:139)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #3
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1088BE: ThreadFunction2 (MTError01.c:31)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #5
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10893B: ThreadFunction4 (MTError01.c:52)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #4
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10891C: ThreadFunction3 (MTError01.c:45)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #5
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10893B: ThreadFunction4 (MTError01.c:52)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #5
+==18761== Locks held: none
+==18761==    at 0x108945: ThreadFunction4 (MTError01.c:54)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #4
+==18761== Locks held: none
+==18761==    at 0x108901: ThreadFunction3 (MTError01.c:43)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #5
+==18761== Locks held: none
+==18761==    at 0x10895F: ThreadFunction4 (MTError01.c:57)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #4
+==18761== Locks held: none
+==18761==    at 0x108901: ThreadFunction3 (MTError01.c:43)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108C96: main (MTError01.c:143)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #5
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10893B: ThreadFunction4 (MTError01.c:52)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #6 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108CEF: main (MTError01.c:147)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #6
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108999: ThreadFunction5 (MTError01.c:65)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC533: vfprintf (vfprintf.c:1328)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108CAC: main (MTError01.c:144)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #6
+==18761== Locks held: none
+==18761==    at 0x1089A3: ThreadFunction5 (MTError01.c:67)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #5
+==18761== Locks held: none
+==18761==    at 0x10895F: ThreadFunction4 (MTError01.c:57)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108CFE: main (MTError01.c:148)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #6
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108999: ThreadFunction5 (MTError01.c:65)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #6
+==18761== Locks held: none
+==18761==    at 0x1089BD: ThreadFunction5 (MTError01.c:70)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #5
+==18761== Locks held: none
+==18761==    at 0x10895F: ThreadFunction4 (MTError01.c:57)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #5
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x10897A: ThreadFunction4 (MTError01.c:59)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108CFE: main (MTError01.c:148)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108D66: main (MTError01.c:153)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #6
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108999: ThreadFunction5 (MTError01.c:65)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #7 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108D57: main (MTError01.c:152)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #7
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1089F7: ThreadFunction6 (MTError01.c:79)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC533: vfprintf (vfprintf.c:1328)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108D7C: main (MTError01.c:154)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #7
+==18761== Locks held: none
+==18761==    at 0x108A01: ThreadFunction6 (MTError01.c:81)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #6
+==18761== Locks held: none
+==18761==    at 0x1089BD: ThreadFunction5 (MTError01.c:70)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108DA0: main (MTError01.c:156)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #7
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1089F7: ThreadFunction6 (MTError01.c:79)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #7
+==18761== Locks held: none
+==18761==    at 0x108A1B: ThreadFunction6 (MTError01.c:84)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #6
+==18761== Locks held: none
+==18761==    at 0x1089BD: ThreadFunction5 (MTError01.c:70)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #8 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108DBF: main (MTError01.c:157)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #8
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108A55: ThreadFunction7 (MTError01.c:93)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #7
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1089F7: ThreadFunction6 (MTError01.c:79)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #8
+==18761== Locks held: none
+==18761==    at 0x108A5F: ThreadFunction7 (MTError01.c:95)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #7
+==18761== Locks held: none
+==18761==    at 0x108A1B: ThreadFunction6 (MTError01.c:84)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108DCE: main (MTError01.c:158)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #8
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108A55: ThreadFunction7 (MTError01.c:93)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #8
+==18761== Locks held: none
+==18761==    at 0x108A79: ThreadFunction7 (MTError01.c:98)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #7
+==18761== Locks held: none
+==18761==    at 0x108A1B: ThreadFunction6 (MTError01.c:84)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #6
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x1089D8: ThreadFunction5 (MTError01.c:72)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108DCE: main (MTError01.c:158)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #7
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108A36: ThreadFunction6 (MTError01.c:86)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108DCE: main (MTError01.c:158)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108E08: main (MTError01.c:161)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #8
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108A55: ThreadFunction7 (MTError01.c:93)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #8
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108A94: ThreadFunction7 (MTError01.c:100)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108DCE: main (MTError01.c:158)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ---Thread-Announcement------------------------------------------
+==18761== 
+==18761== Thread #9 was created
+==18761==    at 0x518287E: clone (clone.S:71)
+==18761==    by 0x4E49EC4: create_thread (createthread.c:100)
+==18761==    by 0x4E49EC4: pthread_create@@GLIBC_2.2.5 (pthread_create.c:797)
+==18761==    by 0x4C36A27: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x108E27: main (MTError01.c:162)
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452058 by thread #9
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108AB3: ThreadFunction8 (MTError01.c:107)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50BC533: vfprintf (vfprintf.c:1328)
+==18761==    by 0x50C5F25: printf (printf.c:33)
+==18761==    by 0x108DE4: main (MTError01.c:159)
+==18761==  Address 0x5452058 is 24 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #9
+==18761== Locks held: none
+==18761==    at 0x108ABD: ThreadFunction8 (MTError01.c:109)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #8
+==18761== Locks held: none
+==18761==    at 0x108A79: ThreadFunction7 (MTError01.c:98)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108E36: main (MTError01.c:163)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #9
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108AB3: ThreadFunction8 (MTError01.c:107)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #9
+==18761== Locks held: none
+==18761==    at 0x108AD7: ThreadFunction8 (MTError01.c:112)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #8
+==18761== Locks held: none
+==18761==    at 0x108A79: ThreadFunction7 (MTError01.c:98)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #1
+==18761== Locks held: none
+==18761==    at 0x108E6E: main (MTError01.c:168)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #9
+==18761== Locks held: none
+==18761==    at 0x108AD7: ThreadFunction8 (MTError01.c:112)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 4 at 0x30A014 by thread #1
+==18761== Locks held: none
+==18761==    at 0x108E77: main (MTError01.c:168)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #9
+==18761== Locks held: none
+==18761==    at 0x108AD7: ThreadFunction8 (MTError01.c:112)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452050 by thread #9
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108AF2: ThreadFunction8 (MTError01.c:114)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108E36: main (MTError01.c:163)
+==18761==  Address 0x5452050 is 16 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during read of size 4 at 0x30A014 by thread #1
+==18761== Locks held: none
+==18761==    at 0x108E98: main (MTError01.c:172)
+==18761== 
+==18761== This conflicts with a previous write of size 4 by thread #9
+==18761== Locks held: none
+==18761==    at 0x108AD7: ThreadFunction8 (MTError01.c:112)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x30a014 is 0 bytes inside data symbol "sum"
+==18761== 
+==18761== ----------------------------------------------------------------
+==18761== 
+==18761== Possible data race during write of size 1 at 0x5452053 by thread #1
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108EBC: main (MTError01.c:173)
+==18761== 
+==18761== This conflicts with a previous write of size 1 by thread #9
+==18761== Locks held: none
+==18761==    at 0x4C3C546: mempcpy (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50EC993: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108AB3: ThreadFunction8 (MTError01.c:107)
+==18761==    by 0x4C36C26: ??? (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x4E496DA: start_thread (pthread_create.c:463)
+==18761==    by 0x518288E: clone (clone.S:95)
+==18761==  Address 0x5452053 is 19 bytes inside a block of size 1,024 alloc'd
+==18761==    at 0x4C30F2F: malloc (in /usr/lib/valgrind/vgpreload_helgrind-amd64-linux.so)
+==18761==    by 0x50DF18B: _IO_file_doallocate (filedoalloc.c:101)
+==18761==    by 0x50EF378: _IO_doallocbuf (genops.c:365)
+==18761==    by 0x50EE497: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+==18761==    by 0x50EC9EC: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+==18761==    by 0x50E1A8E: puts (ioputs.c:40)
+==18761==    by 0x108B24: main (MTError01.c:125)
+==18761==  Block was alloc'd by thread #1
+==18761== 
+==18761== 
+==18761== For counts of detected and suppressed errors, rerun with: -v
+==18761== Use --history-level=approx or =none to gain increased speed, at
+==18761== the cost of reduced accuracy of conflicting-access information
+==18761== ERROR SUMMARY: 886 errors from 49 contexts (suppressed: 882 from 784)

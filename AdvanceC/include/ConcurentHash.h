@@ -1,0 +1,172 @@
+#ifndef __CON_HASH_H__
+#define __CON_HASH_H__
+
+#include <stddef.h>  /* size_t */
+
+
+/** 
+ *  @file HashMap.h
+ *  @brief safe thread Generic concurrent Hash map of key-value pairs implemented with separate chaining using linked lists.
+ *	
+ *  @details  The hash map (sometimes called dictionary or associative array)
+ *  is a set of distinct keys (or indexes) mapped (or associated) to values.
+ *  size of allocated table will be the nearest prime number greater than requested capacity.
+ *  Lists used for chaining will be allocated eagerly.
+ *
+ *  @author benebrhi samuel  (benebrhi@gmail.com)
+ * 
+ *  @bug No known bugs! 
+ */
+
+
+typedef struct ConcurentHash ConcurentHash;
+
+typedef enum ConMap_Result {
+	CONMAP_SUCCESS = 0,
+	CONMAP_UNINITIALIZED_ERROR, 		/**< Uninitialized map error 	*/
+	CONMAP_KEY_NULL_ERROR, 			/**< Key was null 				*/
+	CONMAP_KEY_DUPLICATE_ERROR, 		/**< Duplicate key error 		*/
+	CONMAP_KEY_NOT_FOUND_ERROR, 		/**< Key not found 				*/
+	CONMAP_ALLOCATION_ERROR,			/**< Allocation error 	 		*/
+	CONMAP_EMPTY_ERROR,				/**< Empty List 				*/
+	CONMAP_LOCKER_FAIL					/**< Locker error 				*/
+} ConMap_Result;
+
+
+typedef size_t (*HashFunction)(const void* _key);
+typedef int (*EqualityFunction)(const void* _firstKey, const void* _secondKey);
+typedef int	(*KeyValueActionFunction)(const void* _key, void* _value, void* _context);
+
+
+/** 
+ * @brief Create a new hash map with given capcity and key characteristics.
+ * @param[in] _capacity - Expected max capacity 
+ * 						  actuall capacity will be equal to nearest larger prime number.
+ * @param[in] _hashFunc - hashing function for keys
+ * @param[in] _keysEqualFunc - equality check function for keys. 
+ * @param[in] _numberOfLocker - number of lockers . 
+ * @return newly created map or null on failure
+ */
+ConcurentHash* ConcurentHash_Create(size_t _capacity, HashFunction _hashFunc, EqualityFunction _keysEqualFunc,size_t _numberOfLocker);
+
+
+/**
+ * @brief destroy hash map and set *_map to null
+ * @param[in] _map : map to be destroyed
+ * @param[optional] _keyDestroy : pointer to function to destroy keys
+ * @param[optional] _valDestroy : pointer to function to destroy values 
+ * @details optionally destroy all keys and values using user provided functions
+ */
+void ConcurentHash_Destroy(ConcurentHash** _map, void (*_keyDestroy)(void* _key), void (*_valDestroy)(void* _value));
+
+
+/** 
+ * @brief Adjust map capacity and rehash all key/value pairs
+ * @param[in] _map - exisiting map
+ * @param[in] _newCapacity - new capacity shall be rounded to nearest larger prime number.
+ * @return MAP_SUCCESS or MAP_ALLOCATION_ERROR
+ */
+ConMap_Result ConcurentHash_Rehash(ConcurentHash *_map, size_t newCapacity);
+
+
+/** 
+ * @brief Insert a key-value pair into the hash map.
+ * complexty(?)
+ * @param[in] _map - Hash map to insert to, must be initialized
+ * @param[in] _key - key to serve as index 
+ * @param[in] _value - the value to associate with the key 
+ * @return Success indicator
+ * @retval  MAP_SUCCESS	on success
+ * @retval  MAP_KEY_DUPLICATE_ERROR	if key alread present in the map
+ * @retval  MAP_KEY_NULL_ERROR
+ * @retval  MAP_ALLOCATION_ERROR on failer to allocate key-value pair
+ * @retval  MAP_UNINITIALIZED_ERROR
+ * 
+ * @warning key must be unique and destinct
+ */
+ConMap_Result ConcurentHash_Insert(ConcurentHash* _map, const void* _key, const void* _value);
+
+
+/** 
+ * @brief Remove a key-value pair from the hash map.
+ * complexty(?)
+ * @param[in] _map - Hash map to remove pair from, must be initialized
+ * @param[in] _searchKey - key to to search for in the map
+ * @param[out] _pKey - pointer to variable that will get the key stored in the map equaling _searchKey
+ * @param[out] _pValue - pointer to variable that will get the value stored in the map corresponding to foind key
+ * @return Success indicator
+ * @retval  MAP_SUCCESS	on success
+ * @retval  MAP_KEY_NULL_ERROR
+ * @retval  MAP_KEY_NOT_FOUND_ERROR if key not found
+ * @retval  MAP_UNINITIALIZED_ERROR
+ * 
+ * @warning key must be unique and destinct
+ */
+ConMap_Result ConcurentHash_Remove(ConcurentHash* _map, const void* _searchKey, void** _pKey, void** _pValue);
+
+
+/** 
+ * @brief Find a value by key
+ * complexty(1)
+ * @param[in] _map - Hash map to use, must be initialized
+ * @param[in] _searchKey - key to serve as index for search
+ * @param[out] _pValue - pointer to variable that will get the value assoiciated with the search key.
+ * @return Success indicator
+ * @retval  MAP_SUCCESS	on success
+ * @retval  MAP_KEY_NULL_ERROR
+ * @retval  MAP_KEY_NOT_FOUND_ERROR if key not found
+ * @retval  MAP_UNINITIALIZED_ERROR
+ * 
+ * @warning key must be unique and destinct
+ */
+ConMap_Result ConcurentHash_Find(const ConcurentHash* _map, const void* _searchKey, void** _pValue);
+
+/** 
+ * @brief update a value find by key
+ * complexty(1)
+ * @param[in] _map - Hash map to use, must be initialized
+ * @param[in] _searchKey - key to serve as index for search
+ * @param[in] _f - pointer to function to update the data.
+ * @return Success indicator
+ * @retval  MAP_SUCCESS	on success
+ * @retval  MAP_KEY_NULL_ERROR
+ * @retval  MAP_KEY_NOT_FOUND_ERROR if key not found
+ * @retval  MAP_UNINITIALIZED_ERROR
+ * 
+ * @warning key must be unique and destinct
+ */
+ConMap_Result ConcurentHash_update(ConcurentHash* _map, const void* _searchKey,void*(*f)(void*,void*), void* _context);
+
+
+/** 
+ * This method is optional in the homework 
+ * @brief Iterate over all key-value pairs in the map and call a function for each pair
+ * The user provided KeyValueActionFunction will be called for each element.  
+ * Iteration will stop if the called function returns a zero for a given pair
+ * 
+ * @param[in] _map - Hash map to iterate over.
+ * @param[in] _action - User provided function pointer to be invoked for each element
+ * @param[in] _context - User provided function pointer to be invoked for each element
+ * @returns number of times the user functions was invoked
+ */
+size_t CHashMap_ForEach(const ConcurentHash* _map, KeyValueActionFunction _action, void* _context);
+
+/** 
+ * @brief Find a value by key
+ * complexty(1)
+ * @param[in] _map - Hash map to use, must be initialized
+ * @param[in] _searchKey - key to serve as index for search
+ * @param[out] _pValue - pointer to variable that will get the value assoiciated with the search key.
+ * @return Success indicator
+ * @retval  MAP_SUCCESS	on success
+ * @retval  MAP_KEY_NULL_ERROR
+ * @retval  MAP_KEY_NOT_FOUND_ERROR if key not found
+ * @retval  MAP_UNINITIALIZED_ERROR
+ * 
+ * @warning key must be unique and destinct
+ */
+ConMap_Result ConcurentHash_Get(const ConcurentHash* _map, const void* _searchKey, void*(*f)(void*,void*),void* getValue);
+
+
+
+#endif /* __HASHMAP_H__ */

@@ -1,0 +1,2 @@
+level = Trace
+file = log.txt

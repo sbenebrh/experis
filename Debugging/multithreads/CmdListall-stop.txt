@@ -1,0 +1,28 @@
+show pagination ; set pagination off
+show print thread-events 
+show mi-async 
+show non-stop
+start ; cont
+Ctl+C
+bt ; info threads ; cont 
+Ctl+C
+info threads ; bt ; thread 2 ; bt ; thread 5 ; bt 
+thread 1
+bt
+finish
+info threads ; bt ; thread 2 ;bt ; thread 1 ;bt
+finish
+info threads
+thread 5 ; bt ; up ;up ;list
+break 51
+cont
+info threads
+cont &
+info breakpoint ; clear 51
+cont &
+help
+interrupt
+cont &
+interrupt
+break 65; play...
+clear 65 ; break 65 thread 7 ;play...

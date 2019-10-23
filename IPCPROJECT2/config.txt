@@ -1,0 +1,14 @@
+subAggr=
+{
+	capacity = 10;
+	lockers = 3;
+	threads = 2;
+}
+
+input = 
+{
+	fileMask = "*.cdr";
+	handler = "/home/samuel/work/IPCPROJECT2/files_part/fHandler";
+	inDir = "../CdrFolder/"; 
+	doneDir = "../CdrDone"; 
+};
